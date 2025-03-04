@@ -3,17 +3,17 @@ name: Deploy CDK Stack
 on:
   push:
     branches:
-      - main  # Runs only when changes are pushed to the main branch
+      - main
     paths:
-      - "plan_obs/**"  # Only triggers when files in the "cdk" directory change
+      - "plan_obs/**"  # Runs only if files in the "plan_obs" folder change
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest  # Runs the job on a fresh Ubuntu virtual machine
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3  # Clones the repo into the runner
+        uses: actions/checkout@v3
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v2
@@ -25,22 +25,22 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18  # Ensures Node.js 18 is installed for CDK
+          node-version: 18
 
       - name: Install AWS CDK
-        run: npm install -g aws-cdk  # Installs AWS CDK globally
+        run: npm install -g aws-cdk
 
       - name: Install dependencies
         run: |
           cd cdk
-          npm install  # Installs project dependencies inside "cdk" directory
+          npm install
 
       - name: Synthesize CDK
         run: |
           cd cdk
-          cdk synth  # Converts CDK code to CloudFormation template
+          cdk synth
 
       - name: Deploy CDK Stack
         run: |
           cd cdk
-          cdk deploy --require-approval never  # Deploys the infrastructure without asking for approval
+          cdk deploy --require-approval never
