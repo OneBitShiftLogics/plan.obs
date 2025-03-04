@@ -42,5 +42,5 @@ jobs:
 
       - name: Deploy CDK Stack
         run: |
-          cd cdk
+          cd plan_obs
           cdk deploy --require-approval never
