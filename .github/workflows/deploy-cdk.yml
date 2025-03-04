@@ -32,12 +32,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          cd cdk
+          cd plan_obs
           npm install
 
       - name: Synthesize CDK
         run: |
-          cd cdk
+          cd plan_obs
           cdk synth
 
       - name: Deploy CDK Stack

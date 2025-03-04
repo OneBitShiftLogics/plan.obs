@@ -26,6 +26,7 @@ export class PlanObsStack extends cdk.Stack {
         PLANS_TABLE_NAME: plansTable.tableName,
       },
     });
+    
 
     // Grant Lambda access to DynamoDB
     plansTable.grantReadWriteData(plansLambda);
@@ -47,7 +48,7 @@ export class PlanObsStack extends cdk.Stack {
     singlePlanResource.addMethod('PUT', new apigateway.LambdaIntegration(plansLambda)); // Update
     singlePlanResource.addMethod('DELETE', new apigateway.LambdaIntegration(plansLambda)); // Delete
 
-    
+
     // Output API URL
     new cdk.CfnOutput(this, 'ApiUrl', {
       value: api.url,
